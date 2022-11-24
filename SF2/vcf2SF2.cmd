@@ -1,4 +1,6 @@
 #!/bin/bash
+
+### infile for SF2 
 for j in CAN PAL MON
 do
 DIR=/mnt/lustre/scratch/nlsas/home/csic/bbe/jsg/B_JUN_reseq/A_POP_VCFs/227/$j
