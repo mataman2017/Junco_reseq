@@ -1,3 +1,4 @@
+#!/bin/bash 
 
 ### First run easySFS with the --preview option to check the suitability of the number of samples to use in each population. 
 
