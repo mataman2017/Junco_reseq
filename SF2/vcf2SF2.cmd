@@ -30,7 +30,7 @@ CHR=$(find $DIR -name "*.in" )
 	done
 done
 
-### Creating the combined frequency file to achieve the SpectFile.
+### Creating the combined frequency file and running SF2 to get the SpectFile.
 DIR=/mnt/lustre/scratch/nlsas/home/csic/bbe/jsg/B_JUN_reseq/B_SF2_in/227
 for i in CAN PAL MON
 do
@@ -39,10 +39,8 @@ do
 	awk 'FNR==1{print $0}' *ScoVZU6_1043__HRSCAF___1065-var.in > Combined_freq_file_${i}
 	for j in $CHR
 	do
-		awk 'FNR>1{print $0}' $j >> Combined_freq_file_${i}
+		awk 'FNR>1{print $0}' $j >> Combined_freq_file_$i
 	done
+	SweepFinder2 –f Combined_freq_file_${i} SpectFile_$i
 done
-
-
-####Creating the Spectfile for each population
 
