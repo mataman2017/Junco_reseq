@@ -35,14 +35,14 @@ DIR=/mnt/lustre/scratch/nlsas/home/csic/bbe/jsg/B_JUN_reseq/B_SF2_in/227
 for i in CAN PAL MON
 do
 	cd $DIR/$i
-	DIR=$(pwd)
-	CHR=$(find $CHR -name "*-var.recode.in")
+	CHR=$(find ./ -name "*-var.in")
 	awk 'FNR==1{print $0}' *ScoVZU6_1043__HRSCAF___1065-var.in > Combined_freq_file_${i}
 	for j in $CHR
 	do
 		awk 'FNR>1{print $0}' $j >> Combined_freq_file_${i}
 	done
 done
+
 
 ####Creating the Spectfile for each population
 
