@@ -24,7 +24,7 @@ CHR=$(find $DIR -name "*.in" )
 	do
 		NAME=$(basename "$i")   #ESTO SE QUEDA SOLO CON NOMBRE DEL ARCHIVO, NO CON $PATH
 		NAME2=${NAME%.in}
-		awk 'FNR>1{print $1}' > $DIR/$NAME2.grid
+		awk 'FNR>1 {print $1}' $i > $DIR/$NAME2.grid
 		echo "done for ${NAME2} ${j}"
 	done
 done
