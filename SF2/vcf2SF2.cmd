@@ -16,6 +16,7 @@ CHR=$(find $DIR -name "*vcf.gz" )
 	done
 done
 
+### Creating the grid
 for j in CAN PAL MON
 do
 DIR=/mnt/lustre/scratch/nlsas/home/csic/bbe/jsg/B_JUN_reseq/B_SF2_in/227/$j
@@ -28,3 +29,19 @@ CHR=$(find $DIR -name "*.in" )
 		echo "done for ${NAME2} ${j}"
 	done
 done
+
+### Creating the combined frequency file to achieve the SpectFile.
+DIR=/mnt/lustre/scratch/nlsas/home/csic/bbe/jsg/B_JUN_reseq/B_SF2_in/227
+for i in CAN PAL MON
+do
+	cd $DIR/$i
+	DIR=$(pwd)
+	CHR=$(find $CHR -name "*-var.recode.in")
+	awk 'FNR==1{print $0}' *ScoVZU6_1043__HRSCAF___1065-var.recode.in > Combined_freq_file_${i}
+	for j in $CHR
+	do
+		awk 'FNR>1{print $0}' $j >> Combined_freq_file_${i}
+	done
+	cd ..
+done
+
