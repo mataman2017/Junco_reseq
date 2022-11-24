@@ -37,11 +37,12 @@ do
 	cd $DIR/$i
 	DIR=$(pwd)
 	CHR=$(find $CHR -name "*-var.recode.in")
-	awk 'FNR==1{print $0}' *ScoVZU6_1043__HRSCAF___1065-var.recode.in > Combined_freq_file_${i}
+	awk 'FNR==1{print $0}' *ScoVZU6_1043__HRSCAF___1065-var.in > Combined_freq_file_${i}
 	for j in $CHR
 	do
 		awk 'FNR>1{print $0}' $j >> Combined_freq_file_${i}
 	done
-	cd ..
 done
+
+####Creating the Spectfile for each population
 
