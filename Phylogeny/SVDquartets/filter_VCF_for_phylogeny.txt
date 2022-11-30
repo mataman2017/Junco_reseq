@@ -7,3 +7,13 @@ cat out.idepth  | awk '$1 > 0 { print substr($1,1,3)"\t"$0}' | tail -n +2 | sort
 
 #### create vcf.gz with 2 individuals per population with best depth score
 bcftools view -S best_depth_2inds_list.txt -Oz -o JUN_36_best.vcf.gz  JUN_227_2.vcf.gz
+
+#### extra filtering with bcftools 
+bcftools view -e 'AC==0 || AC==AN || F_MISSING > 0.2' -m2 -M2 -O z -o JUN_36_best_FILT.vcf.gz JUN_36_best.vcf.gz
+
+#### LD filtering
+./ldFiltering.sh JUN_36_best_FILT.vcf.gz
+
+
+#### Convert VCF to nexus
+python vcf2phylip.py -i FILENAME --output-folder ./VCF2/ -o VUL1 VUL2 --output-prefix JUN_36_best_FILT -n -b
