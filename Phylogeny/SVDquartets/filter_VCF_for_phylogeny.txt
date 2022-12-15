@@ -14,6 +14,5 @@ bcftools view -e 'AC==0 || AC==AN || F_MISSING > 0.2' -m2 -M2 -O z -o JUN_36_bes
 #### LD filtering
 ./ldFiltering.sh JUN_36_best_FILT.vcf.gz
 
-
 #### Convert VCF to nexus
 python ./vcf2phyllip.py -i JUN_36_best_FILT.LDpruned.vcf.gz --output-folder ./ -o VUL1 --output-prefix JUN_36_best_FILT -n -b
