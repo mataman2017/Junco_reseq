@@ -22,7 +22,19 @@ vcftools --gzvcf paldorcan_nohyb_109_mac1.recode.vcf.gz \
   bgzip -c > ${OUT}.vcf.gz
   
 vcf2phylip.py -i ${OUT}.vcf.gz \
-  --output-prefix $OUT  
+  --output-prefix $OUT
+  
+cd /mnt/DATA/A_juncos_GBS/B_analysis/O_paldorcan_nhyb_112/E_4/C_SNAPP
+
+ruby snapp_prep.rb \
+  -p ${OUT}.min4.phy \ # Input phylip file
+  -t pop.file \ # Population to sample map
+  -c constraints.txt \ # Node constraints
+  -s starting_tree.nwk \ # Topology constraint
+  -x highcov_n2.xml \ # XML file name
+  -l 1000000 \ # Number of MCMC generations
+  -m 1000  # Number of SNPs
+  -o snapp/highcov_n2 \ # SNAPP output name
  
 
   
