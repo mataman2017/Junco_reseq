@@ -33,8 +33,8 @@ ruby snapp_prep.rb \
   -s starting_tree.nwk \ # Topology constraint
   -x highcov_n2.xml \ # XML file name
   -l 1000000 \ # Number of MCMC generations
-  -m 1000  # Number of SNPs
-  -o snapp/highcov_n2 \ # SNAPP output name
+  -m 34231  # Number of SNPs
+  -o highcov_n2 \ # SNAPP output name
  
 
   
