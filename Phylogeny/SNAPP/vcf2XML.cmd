@@ -36,6 +36,9 @@ ruby snapp_prep.rb \
   -m 34231  # Number of SNPs
   -o highcov_n2 \ # SNAPP output name
  
+ beast -threads 20 ./highcov_n2.xml
+ 
+ 
 
   
   
