@@ -2,20 +2,18 @@ import sys
 import argparse
 import gzip
 import re
+import subprocess
 
 """
-Javier Sala-Garcia
-javisala.bcn@gmail.com
-Museo Nacional de Ciencias Naturales (MNCN-CSIC)
-JUNE 2023
-
-This script was modified from a script provided by Krisian Ullrich's personal GitHub.
+This script was modified by Javi Sala-Garcia (javier.sala@mncn.csic.es),
+from Museo Nacional de Ciencias Naturales (MNCN-CSIC) at JUNE 2023,
+from a script provided by Krisian Ullrich's personal GitHub.
 Please find additional information of the original script below:
-    Author: Krisian Ullrich
-    date: December 2021
-    email: ullrich@evolbio.mpg.de
-    License: MIT
-    The MIT License (MIT)
+Author: Krisian Ullrich
+date: December 2021
+email: ullrich@evolbio.mpg.de
+License: MIT
+The MIT License (MIT)
 ...
 """
 
@@ -72,12 +70,13 @@ def parse_lines(fin, fou, ind, keep, add):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='polarizeVCFbyOutgroup', description='Switch REF and ALT allele of a vcf file, if specified individual is homozygous ALT.')
+    parser = argparse.ArgumentParser(prog='polarizeVCFbyOutgroup', description='Switch REF and ALT allele of a vcf file if the specified individual is homozygous ALT.')
     parser.add_argument('-vcf', help='specify vcf input file')
     parser.add_argument('-out', help='specify output file')
     parser.add_argument('-ind', type=int, help='specify index of individual to polarize')
     parser.add_argument('-keep', action='store_true', help='keep sites with undefined ancestral state')
     parser.add_argument('-add', action='store_true', help='add ancestral allele INFO field')
+    parser.add_argument('-gz', action='store_true', help='compress output using gzip and index with bcftools')
     args = parser.parse_args()
 
     vcf_file = args.vcf
@@ -85,10 +84,15 @@ def main():
     ind_index = args.ind
     keep_undefined = args.keep
     add_ancestral = args.add
+    compress_output = args.gz
 
     with gzip.open(vcf_file, 'rt') if vcf_file.endswith('.gz') else open(vcf_file, 'r') as fin:
         with open(output_file, 'w') as fou:
             parse_lines(fin, fou, ind_index, keep_undefined, add_ancestral)
+
+    if compress_output:
+        subprocess.run(['bgzip', output_file])
+        subprocess.run(['bcftools', 'index', output_file + '.gz'])
 
 if __name__ == '__main__':
     main()
