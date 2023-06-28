@@ -4,15 +4,18 @@ import gzip
 import re
 
 """
-This script was modified by Javi Sala-Garcia (javier.sala@mncn.csic.es),
-from Museo Nacional de Ciencias Naturales (MNCN-CSIC) at JUNE 2023,
-from a script provided by Krisian Ullrich's personal GitHub.
+Javier Sala-Garcia
+javisala.bcn@gmail.com
+Museo Nacional de Ciencias Naturales (MNCN-CSIC)
+JUNE 2023
+
+This script was modified from a script provided by Krisian Ullrich's personal GitHub.
 Please find additional information of the original script below:
-Author: Krisian Ullrich
-date: December 2021
-email: ullrich@evolbio.mpg.de
-License: MIT
-The MIT License (MIT)
+    Author: Krisian Ullrich
+    date: December 2021
+    email: ullrich@evolbio.mpg.de
+    License: MIT
+    The MIT License (MIT)
 ...
 """
 
