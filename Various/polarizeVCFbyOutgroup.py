@@ -5,6 +5,11 @@ import re
 import subprocess
 
 """
+
+usage: polarizeVCFbyOutgroup [-h] [-vcf VCF] [-out OUT] [-ind IND] [-keep] [-add] [-gz]
+
+Switch REF and ALT allele of a vcf file if the specified individual is homozygous ALT.
+
 This script was modified by Javi Sala-Garcia (javier.sala@mncn.csic.es),
 from Museo Nacional de Ciencias Naturales (MNCN-CSIC) at JUNE 2023,
 from a script provided by Krisian Ullrich's personal GitHub.
