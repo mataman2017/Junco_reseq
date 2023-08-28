@@ -1,3 +1,3 @@
 # Junco_reseq
 
-Personal github to load used scripts
+Personal github to save used scripts
