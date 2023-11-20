@@ -19,5 +19,3 @@ using DataFrames
 df_sp = writeTableCF(q, t)
 
 CSV.write("tableCF_species.csv", df_sp)
-
-d_sp = readTableCF!(df_sp)
