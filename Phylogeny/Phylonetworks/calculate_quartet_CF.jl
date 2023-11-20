@@ -10,10 +10,6 @@ taxonmap = Dict(row[:individual] => row[:species] for row in eachrow(tm))
 
 using PhyloNetworks
 
-df_sp = writeTableCF(q, t)
-
-CSV.write("tableCF_species.csv", df_sp)
-
 genetrees = readMultiTopology("Trees_concat_astral_225_2-20_FILT_miss_auto_neutral_GC.txt");
 
 q, t = countquartetsintrees(genetrees, taxonmap, showprogressbar=true)
