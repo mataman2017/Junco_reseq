@@ -1,4 +1,3 @@
-
 #!/usr/bin/env julia
 
 # file "runSNaQ.jl". run in the shell like this in general:
