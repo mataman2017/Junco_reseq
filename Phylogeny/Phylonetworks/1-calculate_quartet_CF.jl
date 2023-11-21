@@ -1,5 +1,7 @@
 #!/bin/env julia
 
+using CSV, DataFrames
+
 mappingfile = "pop.txt"
 
 using DataFrames
