@@ -26,3 +26,6 @@ using DataFrames, CSV
 df_sp = DataFrame(CSV.File("/projects/VONHOLDT/jsala/C_Phylo/E_Phylonetworks/tableCF_species.csv", pool=false); copycols=false);
 d_sp = readTableCF!(df_sp);
 net = snaq!(net0, d_sp, hmax=h, filename=outputfile, seed=seed, runs=nruns)
+
+
+raxmlCF = readTableCF("tableCF.csv")
