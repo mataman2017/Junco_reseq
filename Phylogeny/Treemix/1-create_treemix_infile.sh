@@ -43,7 +43,8 @@ awk 'BEGIN{print "scaffold_pos\tscaffold\tpos"}{split($2,pos,":");print $2"\t"po
 paste $file".positions" $file".treemix.frq" > $file".frequencies"
 
 # Calculates frequency values and creates a new frequency file.
-awk '{printf $0 for(i = 4; i <= NF; i++){split($i,values,",") if((values[1]+values[2])>0) freq=values[1]/(values[1]+values[2]) else freq=0 printf freq"\t" } printf "\n"}' $file".frequencies" > $file".frequencies2"
+# awk '{printf $0 for(i = 4; i <= NF; i++){split($i,values,",") if((values[1]+values[2])>0) freq=values[1]/(values[1]+values[2]) else freq=0 printf freq"\t" } printf "\n"}' $file".frequencies" > $file".frequencies2"
+awk '{printf $0; for(i = 4; i <= NF; i++) {split($i, values, ","); if ((values[1] + values[2]) > 0) freq = values[1] / (values[1] + values[2]); else freq = 0; printf "\t" freq} printf "\n"}' $file".frequencies" > $file".frequencies2"
 
 # Renames the newly created frequency file.
 mv $file".frequencies2" $file".frequencies"
