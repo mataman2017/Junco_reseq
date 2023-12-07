@@ -4,6 +4,11 @@
 # Extracts population information from a VCF file and creates a clusters file.
 bcft query -l $file.vcf.gz | awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[1]}' > birds.clust
 
+# filter for biallelic
+ vcftools --gzvcf $file".vcf.gz" \
+         --plink --mac 2 --remove-indels --max-alleles 2 \
+         --out $file
+
 # Converts PED and MAP files to PLINK binary format.
 plink --file $file --make-bed --out $file --allow-no-sex --allow-extra-chr 0
 
