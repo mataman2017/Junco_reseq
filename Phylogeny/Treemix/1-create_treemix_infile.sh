@@ -9,6 +9,15 @@ bcft query -l $file.vcf.gz | awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[1]}'
          --plink --mac 2 --remove-indels --max-alleles 2 \
          --out $file
 
+# Adjust the map file to allow for non-human chromosome names (else the new plink version struggles)
+awk -F"\t" '{
+        split($2,chr,":")
+	$1="1"
+	$2="1:"chr[2]
+        print $0
+}' ${file}.map > better.map
+mv better.map ${file}.map
+
 # Converts PED and MAP files to PLINK binary format.
 plink --file $file --make-bed --out $file --allow-no-sex --allow-extra-chr 0
 
