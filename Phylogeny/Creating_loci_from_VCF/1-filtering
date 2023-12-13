@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH --job-name=filter2
+#SBATCH --nodes=1                   # Number of nodes
+#SBATCH --ntasks-per-node=1         # Number of tasks per node (usually 1 for serial jobs)
+#SBATCH --cpus-per-task=1           # Number of CPU cores per task
+#SBATCH --mem=64G                   # Memory per node (adjust as needed)
+#SBATCH --time=48:00:00             # Maximum runtime in HH:MM:SS
+#SBATCH --chdir=/projects/VONHOLDT/jsala/A_infile/B_VCFs/0_Joint/B_225_nomaf_mask-miss_auto_neutral
+#SBATCH --output=OE/%x-N%N-J%j-%t.out      # Output file
+#SBATCH --error=OE/%x-N%N-J%j-%t.err       # Error file
+
+BED="/projects/VONHOLDT/jsala/A_infile/D_Bed/G_repeat_mask/repeat_maskfile_GOOD.bed"
+SEL="/projects/VONHOLDT/jsala/A_infile/D_Bed/F_SNPs_under_selection_bayescan/outliers_bayescan_236ind_69Msnps.bed"
+IN="/projects/VONHOLDT/jsala/A_infile/B_VCFs/0_Joint/A_240_nomaf/CHR"
+OUT="/projects/VONHOLDT/jsala/A_infile/B_VCFs/0_Joint/B_225_nomaf_mask-miss_auto_neutral"
+bcft="/projects/VONHOLDT/BIN/bcftools-1.9/bcftools"
+EXCLUDE="/projects/VONHOLDT/jsala/A_infile/B_VCFs/0_Joint/A_240_nomaf/list_remove.txt"
+LIST="$(cat /projects/VONHOLDT/jsala/A_infile/B_VCFs/0_Joint/A_240_nomaf/list2.txt)"
+
+for i in $LIST
+do
+# Chromosome name
+LALA=$(basename $i)
+CHR="${LALA%.vcf.gz}"
+bedtools intersect -a $i -b $BED -header -wa -v | bedtools intersect -a stdin -b $SEL -header -wa -v | $bcft view --samples-file ^$EXCLUDE -Oz -o $OUT/temporal_return_when_finished/${CHR}.vcf.gz
+$bcft index $OUT/temporal_return_when_finished/${CHR}.vcf.gz
+done
