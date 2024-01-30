@@ -25,11 +25,11 @@ echo '##INFO=<ID=AA,Number=1,Type=Character,Description="Ancestral allele">' > h
 # Using bcftools to annotate the vcf file with the ancestral allele information
 bcftools annotate -a file_aa.tab.gz \
  -c CHROM,POS,REF,ALT,INFO/AA -h hdr.txt -Oz \
- -o newfile_aa.vcf.gz PhaPDC_68_bial_maf.05.vcf.gz
+ -o Polarized_PhaPDC_68_bial_maf.05.vcf.gz PhaPDC_68_bial_maf.05.vcf.gz
 
 #  Check that it has worked. There should be an info field AA
-bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/AA\n' newfile_aa.vcf.gz | less
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/AA\n' Polarized_PhaPDC_68_bial_maf.05.vcf.gz | less
 
 # Count how many sites have ancestral allele information
 
-bcftools view -e 'INFO/AA=="."' newfile_aa.vcf.gz -H | wc -l
+bcftools view -e 'INFO/AA=="."' Polarized_PhaPDC_68_bial_maf.05.vcf.gz -H | wc -l
