@@ -6,8 +6,6 @@
 #SBATCH -D /mnt/lustre/scratch/nlsas/home/csic/bbe/esl/1-Datos/4-ConsoGVCF/
 #SBATCH -o /home/csic/bbe/esl/2-Envios/1-Muestras_Maria/4-OE-filtvcfs/OE-var2table/%x-%a-%N-%j.out
 #SBATCH -e /home/csic/bbe/esl/2-Envios/1-Muestras_Maria/4-OE-filtvcfs/OE-var2table/%x-%a-%N-%j.err
-#SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user=enrique.saez@mncn.csic.es
 
 module load gatk
 
