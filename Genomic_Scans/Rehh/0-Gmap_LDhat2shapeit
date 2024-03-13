@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#PIPELINE
+
+POP=HYE
+
+# This script calculates the genetic position (cm) using the physical position (bp) and the recombination rate (rho; cM/Mb)
+# gposition = previous_gposition + (pposition - previous_pposition) * (rrate / 1000000)
+
+for i in $(cat /mnt/DATA/B_JUN_reseq/chr.txt)
+	do
+		zcat ${POP}_recomb.txt.gz | head -n 1 > ${POP}_rmap_$i.txt
+		zcat ${POP}_recomb.txt.gz | grep $i >> ${POP}_rmap_$i.txt
+		cat ${POP}_rmap_$i.txt | awk '{print $1,$2,$4}' > tmp
+		mv tmp ${POP}_rmap_$i.txt
+		input_file="${POP}_rmap_$i.txt"
+		output_file="${POP}_rmap_gpos_$i.txt"
+		# Initialize the first value of gposition as 0
+		previous_gposition=0
+		# Process the header (assuming your header is present)
+		head -n 1 "$input_file" | awk '{print $0, "gposition"}' > "$output_file"
+		# Process the data rows (skip the header)
+		tail -n +2 "$input_file" | awk -v prev_pos="$previous_gposition" '
+		{
+		    current_gposition = prev_pos + ($3 / 1000000) * ($2 - prev_col2)
+		    print $0, current_gposition
+		    prev_pos = current_gposition
+		    prev_col2 = $2
+		}' >> "$output_file"     #### Esta es la operacion clave en la que divide rho x 1M, imagino que para pasar de bp a Mb
+		mv "${POP}_rmap_gpos_$i.txt" "${POP}_rmap_$i.txt"
+		mkdir -p shapeit_format
+		cat ${POP}_rmap_$i.txt | awk '{print $2,$3,$4}' | tail -n +2 > temp_file
+		echo "pposition rrate gposition" > shapeit_format/${POP}_rmap_shapeit_$i.txt
+		cat temp_file >> shapeit_format/${POP}_rmap_shapeit_$i.txt
+		rm temp_file
+	done
+
