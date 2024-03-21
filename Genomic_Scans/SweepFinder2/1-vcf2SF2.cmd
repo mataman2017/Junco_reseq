@@ -43,6 +43,6 @@ do
 	do
 		awk 'FNR>1{print $0}' $j >> Combined_freq_file_$i
 	done
-	SweepFinder2 -f Combined_freq_file_${i} SpectFile_$i   # Run this command in the SF2 folder
+	SweepFinder2 -f Combined_freq_file_${i} SpectFile_$i   # This command is not correctly defined in the manual and in the --help command, the hyphen is too long. Here is corrected
 done
 
