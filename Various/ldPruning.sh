@@ -104,12 +104,6 @@ fi
 # Let the user know, that it is working on it
 echo "working..."
 
-# For running on the Euler cluster, load the required modules
-#module load plink/1.07
-#module load openblas/0.2.13_par
-#module load zlib/1.2.8
-#module load vcftools
-
 
 # Check which SNPs are in too high linkage and output a list of SNPs to be pruned out
 vcftools --${gz1}vcf ${file}.vcf${gz2} --plink --out ${file} 2> tmp
