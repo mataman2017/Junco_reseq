@@ -36,6 +36,3 @@ Options:
 - Ensure that `bcftools` and `bgzip` are installed and accessible in your environment.
 - The `-x INFO,FORMAT,^INFO/FORMAT/GT` flag removes all INFO and FORMAT fields except for the genotype (GT) field, which is necessary for the polarization script.
 - After running `bcftools annotate`, the output VCF file (`JUN_227_VAR_nomiss_GT.vcf.gz`) should be used as input (`-vcf`) for the polarization script.
-
-By adding these instructions, users will understand the necessary preprocessing step before using your polarization pipeline. This ensures clarity and completeness in your GitHub repository documentation.
-
