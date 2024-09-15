@@ -21,3 +21,8 @@ vcf2phylip.py -i JUN_227_ASIP_joint_2ind.vcf.gz -p -f -m 1
 
 # Run Saguaro
 ./Saguaro -f /mnt/DATA/B_JUN_reseq/I_phylogeny/G_local_phy/A_ASIP/JUN_227_ASIP_joint_2ind.min1.hmm -o /mnt/DATA/B_JUN_reseq/I_phylogeny/G_local_phy/A_ASIP/ASIP
+
+# Convert to phylip
+./Saguaro2Phylip -i /mnt/DATA/B_JUN_reseq/I_phylogeny/G_local_phy/A_ASIP/ASIP/saguaro.cactus
+
+
