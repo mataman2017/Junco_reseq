@@ -1,0 +1,4 @@
+TREE="/projects/VONHOLDT/jsala/B_PopGen/D_suite/sp_tree_2.txt"
+F4BRANCH="/projects/VONHOLDT/jsala/B_PopGen/D_suite/fbranch_results.txt"
+
+dtools.py -n try_1 --outgroup VUL $FBRANCH $TREE
